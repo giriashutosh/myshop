@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "./store/user/user.action";
+//import { setCurrentUser } from "./store/user/user.action";
 import Home from "./routes/home/home";
 import Navigation from "./routes/navigation/navigation";
 import Authentication from "./routes/authentication/authentication";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
+//import USER_ACTION_TYPES from "./store/user/user.types";
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
@@ -20,7 +21,11 @@ const App = () => {
       if (user) {
         createUserDocumentFromAuth(user);
       }
-      dispatch(setCurrentUser(user));
+      //dispatch(setCurrentUser(user));
+      dispatch({type:'user/SET_CURRENT_USER', payload: user});
+
+      // console.log(setCurrentUser(user));
+      // console.log(user)
     });
     return unsubscribe;
   }, [dispatch]);
