@@ -7,6 +7,7 @@ import Navigation from "./routes/navigation/navigation";
 import Authentication from "./routes/authentication/authentication";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
+import { getCategoriesAndDocuments } from "./utils/firebase/firebase.utils"
 //import USER_ACTION_TYPES from "./store/user/user.types";
 import {
   onAuthStateChangedListener,
@@ -15,7 +16,16 @@ import {
 
 const App = () => {
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoriesArray = await getCategoriesAndDocuments();
+      
+      dispatch({type: 'category/SET_CATEGORIES_MAP', payload: categoriesArray})
+      
+      
+    };
+    getCategoriesMap();
+  }, [dispatch]);
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
