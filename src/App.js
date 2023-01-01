@@ -8,6 +8,8 @@ import Authentication from "./routes/authentication/authentication";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 import { getCategoriesAndDocuments } from "./utils/firebase/firebase.utils"
+//import { selectIsCartOpen } from "./store/cart/cart.selector";
+
 //import USER_ACTION_TYPES from "./store/user/user.types";
 import {
   onAuthStateChangedListener,
@@ -16,12 +18,13 @@ import {
 
 const App = () => {
   const dispatch = useDispatch();
+  
   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoriesArray = await getCategoriesAndDocuments();
       
       dispatch({type: 'category/SET_CATEGORIES_MAP', payload: categoriesArray})
-      
+      console.log("category dispatch")
       
     };
     getCategoriesMap();
@@ -34,12 +37,13 @@ const App = () => {
       //dispatch(setCurrentUser(user));
       dispatch({type:'user/SET_CURRENT_USER', payload: user});
 
-      // console.log(setCurrentUser(user));
-      // console.log(user)
+      console.log("user dispatch")
     });
     return unsubscribe;
   }, [dispatch]);
 
+  
+  
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>

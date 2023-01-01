@@ -1,5 +1,5 @@
-import { createActionReducer } from "../../utils/reducer/reducer.util";
-import { CART_ACTION_TYPES } from "./cart.types";
+// import { createActionReducer } from "../../utils/reducer/reducer.util";
+// import { CART_ACTION_TYPES } from "./cart.types";
 
 const CART_INITIAL_STATE = {
     isCartOpen: false,
@@ -37,43 +37,47 @@ const CART_INITIAL_STATE = {
   };
 export const cartReducer = (state = CART_INITIAL_STATE, action = {}) => {
     const { type, payload } = action;
-  
+    // console.log(type)
+    // console.log(payload)
+    console.log(action)
     switch (type) {
-      case CART_ACTION_TYPES.SET_CART_ITEMS:
+      case "cart/SET_CART_ITEMS":
         return {
           ...state,
           cartItems: payload,
         };
-      case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      case "cart/SET_IS_CART_OPEN":
         return{
           ...state,
           isCartOpen: payload,
         }
+      
       default:
-        throw new Error(`unhandled type of ${type} in cartReducer`);
+        throw new Error("Nhi aa rha");//`unhandled type of ${type} in cartReducer`);
     }
   };
   const clearCartItem = (cartItems, cartItemToClear) => {
     return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
   };
   export const setIsCartOpen = (boolean) => {
-    createActionReducer(CART_ACTION_TYPES.SET_IS_CART_OPEN,boolean)
+    //return createActionReducer(CART_ACTION_TYPES.SET_IS_CART_OPEN,boolean)
+    return {type: "cart/SET_IS_CART_OPEN", payload: boolean}
   }
   export const addItemToCart = (cartItems, productToAdd) => {
     const newCartItems = addCartItem(cartItems, productToAdd);
-    return createActionReducer(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
+    return {type: "cart/SET_CART_ITEMS", payload: newCartItems}//createActionReducer(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
   };    
 
  export const removeItemFromCart = (cartItems, productToRemove) => {
     const newCartItems = removeCartItem(cartItems, productToRemove);
-    return createActionReducer(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
-    
+    //return createActionReducer(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
+    return {type: "cart/SET_CART_ITEMS", payload: newCartItems}
   };
 
 export const clearItemFromCart = (cartItems, cartItemToClear) => {
     const newCartItems = clearCartItem(cartItems, cartItemToClear);
-    return createActionReducer(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
-    
+    //return createActionReducer(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
+    return {type: "cart/SET_CART_ITEMS", payload: newCartItems}
   };
 
   

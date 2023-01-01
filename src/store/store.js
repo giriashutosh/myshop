@@ -6,24 +6,7 @@ import { cartReducer } from './cart/cart.reducer'
 
 import logger from 'redux-logger'
 
-const middleWares = [logger]
-//const composedEnhancers = compose(applyMiddleware(...middleWares))
-
-const rootreducer = {
-    user: userReducer,
-    categories: categoriesReducer,
-    cart: cartReducer
-}
-
-export const store = configureStore({
-    reducer: rootreducer,
-    middleware: middleWares,
-    undefined,
-    
-})
-
 /////custom-middleware
-
 // const loggerMiddleWare = (store) => (next) => (action) => {
 //     if(!action.type){
 //         return next(action);
@@ -37,4 +20,24 @@ export const store = configureStore({
 
 //     console.log('next state: ', store.getState());
 // }
+
+
+const middleWares = [logger]
+//const composedEnhancers = compose(applyMiddleware(...loggerMiddleWare))
+
+const rootreducer = {
+    user: userReducer,
+    categories: categoriesReducer,
+    cart: cartReducer
+}
+
+export const store = configureStore({
+    reducer: rootreducer,
+    middleware: middleWares,
+    undefined,
+    //composedEnhancers
+    
+})
+
+
 
