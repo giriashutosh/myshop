@@ -9,18 +9,7 @@ import Category from "../category/category.component";
 
 import "./shop.styles.scss";
 const Shop = () => {
-  //const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   const getCategoriesMap = async () => {
-  //     const categoriesArray = await getCategoriesAndDocuments();
-      
-  //     dispatch({type: 'category/SET_CATEGORIES_MAP', payload: categoriesArray})
-      
-      
-  //   };
-  //   getCategoriesMap();
-  // }, [dispatch]);
+  
 
   return (
     <Routes>

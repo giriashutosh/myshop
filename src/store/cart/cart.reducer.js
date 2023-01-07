@@ -6,7 +6,7 @@ const CART_INITIAL_STATE = {
     cartItems: [],
    
   };
-  const addCartItem = (cartItems, productToAdd) => {
+const addCartItem = (cartItems, productToAdd) => {
     //find cartItems contains productToAdd
     const existItem = cartItems.find((item) => item.id === productToAdd.id);
     //if exist just increase the quantity
@@ -37,9 +37,9 @@ const CART_INITIAL_STATE = {
   };
 export const cartReducer = (state = CART_INITIAL_STATE, action = {}) => {
     const { type, payload } = action;
-    // console.log(type)
+    console.log(type)
     // console.log(payload)
-    console.log(action)
+    //console.log(action)
     switch (type) {
       case "cart/SET_CART_ITEMS":
         return {
@@ -53,8 +53,8 @@ export const cartReducer = (state = CART_INITIAL_STATE, action = {}) => {
         }
       
       default:
-        throw new Error("Nhi aa rha");//`unhandled type of ${type} in cartReducer`);
-    }
+          return state
+          }
   };
   const clearCartItem = (cartItems, cartItemToClear) => {
     return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);

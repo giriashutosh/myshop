@@ -24,7 +24,7 @@ const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   
   const isCartOpen = useSelector(selectIsCartOpen)
-
+  console.log(isCartOpen)
   return (
     <Fragment>
       <NavigationContainer>
@@ -41,7 +41,7 @@ const Navigation = () => {
           ) : (
             <NavLink to='/auth'>SIGN IN</NavLink>
           )}
-          <CartIcon />
+          <CartIcon /> 
         </NavLinks>
         {isCartOpen && <CartDropdown />}
       </NavigationContainer>

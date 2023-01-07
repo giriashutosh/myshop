@@ -16,9 +16,10 @@ import {
   createUserDocumentFromAuth,
 } from "./utils/firebase/firebase.utils";
 
+
 const App = () => {
   const dispatch = useDispatch();
-  
+  //const isCartOpen = useSelector(selectIsCartOpen)
   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoriesArray = await getCategoriesAndDocuments();
@@ -36,7 +37,7 @@ const App = () => {
       }
       //dispatch(setCurrentUser(user));
       dispatch({type:'user/SET_CURRENT_USER', payload: user});
-
+      //dispatch({type:"cart/SET_IS_CART_OPEN", payload: !isCartOpen})
       console.log("user dispatch")
     });
     return unsubscribe;

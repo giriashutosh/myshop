@@ -4,26 +4,26 @@ import { userReducer } from './user/user.reducer'
 import { cartReducer } from './cart/cart.reducer'
 //import { compose, applyMiddleware} from 'redux'
 
-import logger from 'redux-logger'
+//import logger from 'redux-logger'
 
 /////custom-middleware
-// const loggerMiddleWare = (store) => (next) => (action) => {
-//     if(!action.type){
-//         return next(action);
-//     }
+const loggerMiddleWare = (store) => (next) => (action) => {
+    if(!action.type){
+        return next(action);
+    }
 
-//     console.log('type: ', action.type);
-//     console.log('paylaod: ', action.payload)
-//     console.log('currentState: ', store.getState())
+    console.log('type: ', action.type);
+    console.log('paylaod: ', action.payload)
+    console.log('currentState: ', store.getState())
 
-//     next(action)
+    next(action)
 
-//     console.log('next state: ', store.getState());
-// }
+    console.log('next state: ', store.getState());
+}
 
 
-const middleWares = [logger]
-//const composedEnhancers = compose(applyMiddleware(...loggerMiddleWare))
+const middleWares = [loggerMiddleWare]
+//const composedEnhancers = compose(applyMiddleware(...middleWares))
 
 const rootreducer = {
     user: userReducer,
