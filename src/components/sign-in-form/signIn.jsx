@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import {
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup,
-} from "../../utils/firebase/firebase.utils";
+import {  useDispatch } from "react-redux";
+
+// import {
+//   signInAuthUserWithEmailAndPassword,
+  
+// } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/formInput";
 import "./signIn.styles.scss";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button";
-
+import { googleSignInStart, emailSignInStart } from "../../store/user/user.action";
 const defaultFormFields = {
   email: "",
   password: "",
@@ -15,20 +17,22 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const dispatch = useDispatch()
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+  const signInWithGoogle = () => {
+    //await signInWithGooglePopup();
+    dispatch(googleSignInStart())
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await signInAuthUserWithEmailAndPassword(email, password);
+      dispatch(emailSignInStart(email, password));
 
       resetFormFields();
     } catch (error) {
@@ -55,7 +59,7 @@ const SignInForm = () => {
     <div className="sign-in-container">
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <FormInput
           label="Email"
           type="email"
@@ -63,6 +67,7 @@ const SignInForm = () => {
           onChange={handleChange}
           name="email"
           value={email}
+          autocomplete = "off"
         />
 
         <FormInput
@@ -72,6 +77,7 @@ const SignInForm = () => {
           onChange={handleChange}
           name="password"
           value={password}
+          autocomplete = "current-password"
         />
 
         <div className="buttons-container">

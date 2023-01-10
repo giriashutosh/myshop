@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -6,6 +8,8 @@ import {
 import FormInput from "../form-input/formInput";
 import "./signUp.styles.scss";
 import Button from "../button/button";
+
+import { signUpStart } from '../../store/user/user.action'
 
 const defaultFormFields = {
   displayName: "",
@@ -17,6 +21,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const dispatch = useDispatch()
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -26,12 +31,13 @@ const SignUpForm = () => {
     event.preventDefault();
     if (password === confirmPassword) {
       try {
-        const { user } = await createAuthUserWithEmailAndPassword(
-          email,
-          password
-        );
+        // const { user } = await createAuthUserWithEmailAndPassword(
+        //   email,
+        //   password
+        // );
 
-        await createUserDocumentFromAuth(user, { displayName });
+        // await createUserDocumentFromAuth(user, { displayName });
+        dispatch(signUpStart(email, password, displayName))
         resetFormFields();
       } catch (error) {
         if (error.code === "auth/email-already-in-use") {
@@ -55,7 +61,7 @@ const SignUpForm = () => {
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <FormInput
           label="Display Name"
           type="text"
@@ -63,6 +69,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           name="displayName"
           value={displayName}
+          autocomplete= "given-name"
         />
 
         <FormInput
@@ -72,6 +79,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           name="email"
           value={email}
+          autocomplete = "off"
         />
 
         <FormInput
@@ -81,6 +89,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           name="password"
           value={password}
+          autocomplete = "current-password"
         />
 
         <FormInput
@@ -90,6 +99,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           name="confirmPassword"
           value={confirmPassword}
+          autocomplete = "current-password"
         />
 
         <Button  type="submit">

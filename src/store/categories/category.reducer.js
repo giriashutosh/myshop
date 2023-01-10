@@ -1,19 +1,22 @@
-//import { CATEGORIES_ACTION_TYPES } from "./category.type";
+import { CATEGORIES_ACTION_TYPES } from "./category.type";
 
 export const CATEGORIES_INITIAL_STATE = {
-    //catgoriesMap: {},
     categories: [],
+    isLoading: false,
+    error: null
 };
 
 export const categoriesReducer = (state = CATEGORIES_INITIAL_STATE, action = {}) => {
     const {type, payload} = action;
-    //console.log(action)
+    
     switch (type) {
-        case 'category/SET_CATEGORIES_MAP':
-            //console.log({...state, catgoriesMap: payload})
-            return {...state, categories: payload};
-        default:
-            //console.log("in default")
+        case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START:
+            return {...state, isLoading: true};
+        case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS:
+            return {...state, categories: payload, isLoading: false}
+        case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED:
+                return {...state, error: payload, isLoading: false}
+        default: 
             return state
     }
 }

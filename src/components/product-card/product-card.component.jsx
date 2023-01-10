@@ -1,10 +1,10 @@
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button";
 
-import { addItemToCart } from "../../store/cart/cart.reducer";
+import { addItemToCart } from "../../store/carts/cart.reducer";
 
 import "./product-card.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../store/cart/cart.selector";
+import { selectCartItems } from "../../store/carts/cart.selector";
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;

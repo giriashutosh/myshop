@@ -7,41 +7,40 @@ import Navigation from "./routes/navigation/navigation";
 import Authentication from "./routes/authentication/authentication";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
-import { getCategoriesAndDocuments } from "./utils/firebase/firebase.utils"
+//import { getCategoriesAndDocuments, getCurrentUser } from "./utils/firebase/firebase.utils"
 //import { selectIsCartOpen } from "./store/cart/cart.selector";
 
 //import USER_ACTION_TYPES from "./store/user/user.types";
-import {
-  onAuthStateChangedListener,
-  createUserDocumentFromAuth,
-} from "./utils/firebase/firebase.utils";
+// import {
+//   onAuthStateChangedListener,
+//   createUserDocumentFromAuth,
+//   //getCurrentUser
+// } from "./utils/firebase/firebase.utils";
 
-
+import { checkUserSession } from "./store/user/user.action";
 const App = () => {
   const dispatch = useDispatch();
-  //const isCartOpen = useSelector(selectIsCartOpen)
+  
   useEffect(() => {
-    const getCategoriesMap = async () => {
-      const categoriesArray = await getCategoriesAndDocuments();
+    dispatch(checkUserSession())
+  },[])
+  
+  // useEffect(()=>{
+  //   getCurrentUser().then((user) => console.log(user))
+  // },[])
+
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChangedListener((user) => {
+  //     if (user) {
+  //       createUserDocumentFromAuth(user);
+  //     }
       
-      dispatch({type: 'category/SET_CATEGORIES_MAP', payload: categoriesArray})
-      console.log("category dispatch")
+  //     dispatch({type:'user/SET_CURRENT_USER', payload: user});
       
-    };
-    getCategoriesMap();
-  }, [dispatch]);
-  useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-      //dispatch(setCurrentUser(user));
-      dispatch({type:'user/SET_CURRENT_USER', payload: user});
-      //dispatch({type:"cart/SET_IS_CART_OPEN", payload: !isCartOpen})
-      console.log("user dispatch")
-    });
-    return unsubscribe;
-  }, [dispatch]);
+  //     console.log("user dispatch")
+  //   });
+  //   return unsubscribe;
+  // }, [dispatch]);
 
   
   
