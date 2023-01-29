@@ -37,9 +37,7 @@ const addCartItem = (cartItems, productToAdd) => {
   };
 export const cartReducer = (state = CART_INITIAL_STATE, action = {}) => {
     const { type, payload } = action;
-    //console.log(type)
-    // console.log(payload)
-    //console.log(action)
+    
     switch (type) {
       case "cart/SET_CART_ITEMS":
         return {
