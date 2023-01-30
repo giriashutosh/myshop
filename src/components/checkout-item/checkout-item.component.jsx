@@ -2,7 +2,7 @@ import "./checkout-item.styles.scss";
 
 import { useSelector, useDispatch} from 'react-redux';
 import { selectCartItems } from "../../store/carts/cart.selector";
-import { addItemToCart, clearItemFromCart, removeItemFromCart } from "../../store/carts/cart.reducer";
+import { addItemToCart, clearItemFromCart, removeItemFromCart } from "../../store/carts/cart.action";
 
 const CheckoutItem = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;

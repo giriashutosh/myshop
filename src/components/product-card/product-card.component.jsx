@@ -1,6 +1,6 @@
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button";
 
-import { addItemToCart } from "../../store/carts/cart.reducer";
+import { addItemToCart } from "../../store/carts/cart.action";
 
 import "./product-card.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
